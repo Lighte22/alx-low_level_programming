@@ -4,7 +4,7 @@
  * Description: A function that prints the alphabet, in lowercase
  * Return: always 0
  */
-void print_alphabet(void)
+char main(void)
 {
 	char c;
 
