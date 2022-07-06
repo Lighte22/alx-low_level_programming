@@ -2,8 +2,8 @@
 
 /**
  * main - main block
- * Description: A function that prints the alphabet, in lowercase
- **/
+ * Print_alphabet -> prints the lowercase alphabets
+ */
 void print_alphabet(void)
 {
 	char c;
