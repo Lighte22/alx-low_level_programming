@@ -2,11 +2,13 @@
 
 /**
  * main - prints putchar
+ * Description: A program that prints _putchar
  * Return: always 0
  */
 int main(void)
 {
-	putchar(")
+	putchar('_')
+
 		putchar('p');
 		putchar('u');
 		putchar('t');
