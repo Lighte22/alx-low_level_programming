@@ -1,10 +1,9 @@
 #include "main.h"
 
 /**
- * main - check the code
+ * main - main block
  * Description: A function that prints the alphabet, in lowercase
- * Return: always 0
- */
+ **/
 void print_alphabet(void);
 {
 	char c;
