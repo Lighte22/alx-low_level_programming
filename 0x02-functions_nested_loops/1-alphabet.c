@@ -1,8 +1,8 @@
 #include "main.h"
 
 /**
- * main - main block
- * Print_alphabet -> prints the lowercase alphabets
+ * print_alphabet - entry point
+ * Reason: always 0 (success)
  */
 void print_alphabet(void)
 {
