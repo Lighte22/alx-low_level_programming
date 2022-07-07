@@ -1,13 +1,15 @@
 #include "main.h"
 
 /**
-* add -> adds two number
-* @x:param1
-* @y:param2
-* Return: x + y
-*/
-
-int add(int x, int y)
+ * _islower - Checks if a character is lowercase.
+ * @c: The character to be checked.
+ *
+ * Return: 1 if character is lowercase, 0 otherwise.
+ */
+int _islower(int c)
 {
-	return (x + y);
+	if (c >= 'a' && c <= 'z')
+		return (1);
+	else
+		return (0);
 }
