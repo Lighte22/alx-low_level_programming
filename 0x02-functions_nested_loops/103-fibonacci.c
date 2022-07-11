@@ -1,22 +1,29 @@
 #include <stdio.h>
 
 /**
- * main - Lists all the natural numbers below 1024 (excluded)
- *        that are multiples of 3 or 5.
+ * main - Prints the sum of even-valued Fibonacci sequence
+ *        terms not exceeding 4000000.
  *
  * Return: Always 0.
  */
 int main(void)
 {
-	int i, sum = 0;
+	unsigned long fib1 = 0, fib2 = 1, fibsum;
+	float tot_sum;
 
-	for (i = 0; i < 1024; i++)
+	while (1)
 	{
-		if ((i % 3) == 0 || (i % 5) == 0)
-			sum += i;
-	}
+		fibsum = fib1 + fib2;
+		if (fibsum > 4000000)
+			break;
 
-	printf("%d\n", sum);
+		if ((fibsum % 2) == 0)
+			tot_sum += fibsum;
+
+		fib1 = fib2;
+		fib2 = fibsum;
+	}
+	printf("%.0f\n", tot_sum);
 
 	return (0);
 }
