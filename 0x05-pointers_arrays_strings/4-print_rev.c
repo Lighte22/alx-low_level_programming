@@ -15,7 +15,7 @@ if (s)
 while (*t)
 ++t;
 while (s < t--)
-_putchar(*t);
+    _putchar(*t);
 _putchar('\n');
 }
 }
