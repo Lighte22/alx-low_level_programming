@@ -6,7 +6,7 @@
 * REturn: always 0
 */
 
-vint main(void)
+int main(void)
 {
     char *str;
 
