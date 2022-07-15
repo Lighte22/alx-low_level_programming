@@ -2,58 +2,45 @@
 #include <stdio.h>
 
 /**
- * print_line - prints a s bytes of a buffer
- * @c: buffer to print
- * @s: bytes of buffer to print
- * @l: line of buffer to print
+ * print_buffer - print a buffer
+ * @b: the buffer to print
+ * @size: the number of bytes to print
  *
- * Return: void
- */
-void print_line(char *c, int s, int l)
-{
-    int j, k;
-
-    for (j = 0; j <= 9; j++)
-    {
-        if (j <= s)
-            printf("%02x", c[l * 10 + j]);
-        else
-            printf("  ");
-        if (j % 2)
-            putchar(' ');
-    }
-    for (k = 0; k <= s; k++)
-    {
-        if (c[l * 10 + k] > 31 && c[l * 10 + k] < 127)
-            putchar(c[l * 10 + k]);
-        else
-            putchar('.');
-    }
-}
-/**
- * print_buffer - prints a buffer
- * @b: buffer to print
- * @size: size of buffer
+ * Description: This function prints the content of of size bytes of the
+ * buffer pointed to by b. 10 bytes are printed per line, with each line
+ * prefixed with the position of the first byte, starting at 0. Each line
+ * shows the heaxadecimal content of the buffer 2 bytes at a time, with
+ * each pair separated by a space, followed by the content of the buffer
+ * with non-printable characters shown as a `.'.
  *
  * Return: void
  */
 void print_buffer(char *b, int size)
 {
-    int i;
+int b_pos;
+int l_pos;
 
-    for (i = 0; i <= (size - 1) / 10 && size; i++)
-    {
-        printf("%08x: ", i * 10);
-        if (i < size / 10)
-        {
-            print_line(b, 9, i);
-        }
-        else
-        {
-            print_line(b, size % 10 - 1, i);
-        }
-        putchar('\n');
-    }
-    if (size == 0)
-        putchar('\n');
+for (b_pos = 0; b_pos < size; b_pos += 10)
+{
+printf("%08x: ", b_pos);
+for (l_pos = 0; l_pos < 10; ++l_pos)
+{
+if (b_pos + l_pos < size)
+printf("%02x", b[b_pos + l_pos]);
+else
+printf("  ");
+if (l_pos % 2)
+putchar(' ');
+}
+for (l_pos = 0; l_pos < 10 && b_pos + l_pos < size; ++l_pos)
+{
+if (b[b_pos + l_pos] < 32 || b[b_pos + l_pos] > 126)
+putchar('.');
+else
+putchar(b[b_pos + l_pos]);
+}
+if (b_pos + l_pos < size)
+putchar('\n');
+}
+putchar('\n');
 }
