@@ -5,7 +5,7 @@
 * _strcat -> this is a funcion strcat
 * @dest: first param
 * @src: second param
-* Return: a string
+* Return: a strings
 */
 char *_strcat(char *dest, char *src)
 {
