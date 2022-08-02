@@ -14,6 +14,6 @@ int main(void)
       int s;
 
     s = 98 + 1024;
-    printf("%d\n", 1024);
+    ("%d\n", 1024);
     return (0);
 }
