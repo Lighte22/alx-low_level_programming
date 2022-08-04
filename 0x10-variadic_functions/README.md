@@ -1,0 +1,1 @@
+This is a readme file explaining all about variadic functions.
