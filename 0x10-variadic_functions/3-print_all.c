@@ -1,49 +1,85 @@
 #include "variadic_functions.h"
-#include "variadic_functions.h"
+#include <stdlib.h>
+#include <stdio.h>
+
 /**
-* print_all - Prints all of the arguments when specified
-* @format: specifies the necessary operations
-* Return: void
-*/
+ * print_int - prints int
+ * @list: arguments from print_all
+ */
+void print_int(va_list list)
+{
+	printf("%d", va_arg(list, int));
+}
+
+/**
+ * print_float - prints float
+ * @list: arguments from print_all
+ */
+void print_float(va_list list)
+{
+	printf("%f", va_arg(list, double));
+}
+
+/**
+ * print_char - prints int
+ * @list: arguments from print_all
+ */
+void print_char(va_list list)
+{
+	printf("%c", va_arg(list, int));
+}
+
+/**
+ * print_str - prints string
+ * @list: arguments from print_all
+ */
+void print_str(va_list list)
+{
+	char *s = va_arg(list, char *);
+
+	s == NULL ? printf("(nil)") : printf("%s", s);
+
+}
+
+/**
+ * print_all - prints any type
+ * @format: arguments to print
+ */
+
 void print_all(const char * const format, ...)
 {
-int i;
-int flag;
-char *str;
-va_list a_list;
-va_start(a_list, format);
-i = 0;
-while (format != NULL && format[i] != '\0')
+va_list list;
+int i = 0, j = 0;
+char *sep = "";
+
+printTypeStruct printType[] = {
+	{ "i", print_int },
+	{ "f", print_float },
+	{ "c", print_char },
+	{ "s", print_str },
+	{NULL, NULL}
+};
+
+
+va_start(list, format);
+
+while (format && format[i])
 {
-switch (format[i])
-{
-case 'c':
-printf("%c", va_arg(a_list, int));
-flag = 0;
-break;
-case 'i':
-printf("%i", va_arg(a_list, int));
-flag = 0;
-break;
-case 'f':
-printf("%f", va_arg(a_list, double));
-flag = 0;
-break;
-case 's':
-str = va_arg(a_list, char*);
-if (str == NULL)
-str = "(nil)";
-printf("%s", str);
-flag = 0;
-break;
-default:
-flag = 1;
-break;
+	j = 0;
+	while (j < 4)
+	{
+		if (*printType[j].type == format[i])
+		{
+			printf("%s", sep);
+			printType[j].printer(list);
+			sep = ", ";
+			break;
+		}
+		j++;
+	}
+	i++;
 }
-if (format[i + 1] != '\0' && flag == 0)
-printf(", ");
-i++;
-}
+
 printf("\n");
-va_end(a_list);
+va_end(list);
 }
