@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 /**
- * c - prints character
+ *c - prints character
  */
 
 char c(char a)
