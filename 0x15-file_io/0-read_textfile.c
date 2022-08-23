@@ -1,45 +1,47 @@
-#include <stdio.h>
+#include "main.h"
 #include <stdlib.h>
-#include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <unistd.h>
 #include <fcntl.h>
 
 /**
- *read_textfile - reads a text file and prints it to th POSIX stdout.
- *@filename: name of the file to be read. 
- *@letters: number of the letters t should print and read.
- *Return: real number of letters it should read and print.
- *
- */     
- ssize_t read_textfile(const char *filename, size_t letters)
- {
-     int fd;
-     ssize_t lenf, leng;
-     char *buffer;
-     
-     if(filename == NULL)
-        return (0);
-     fd = open(filename, 0_RDONLY);
-     if(fd == -1)
-        return (0);
-     buffer = malloc (sizeof (char) *letters);
-     if(buffer == NULL)
-     {
-         close(fd);
-         return(0);
-     }
-     lenf = read(fd, buffer, letters);
-     close(fd);
-     if(lenf ==-1)
-     {
-         free(buffer);
-         return(0);
-     }
-     leng = write(STDOUT_FILENO, buffer, lenf);
-     free(buffer);
-     if(lenf !=leng)
-        return(0);
-     return(leng);
- }
- 
+ * read_textfile - fuction that read a text file and print it out the POSIX std
+ * out
+ * @filename: body of text to print.
+ * @letters: max char to print.
+ * Return: number of chars printed.
+ */
+ssize_t read_textfile(const char *filename, size_t letters)
+{
+	int fd, err, rd;
+	char *buf;
+
+	fd = err = rd = 0;
+	if (!filename || !letters)
+		return (0);
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (0);
+
+	buf = malloc(sizeof(char) * letters + 1);
+	if (!buf)
+		return (0);
+	rd = read(fd, buf, letters);
+	if (rd < 0)
+	{
+		free(buf);
+		return (0);
+	}
+	buf[letters] = '\0';
+	err = write(STDOUT_FILENO, buf, rd);
+	if (err <= 0)
+	{
+		free(buf);
+		return (0);
+	}
+
+	free(buf);
+	close(fd);
+	return (rd);
+}
